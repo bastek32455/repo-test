@@ -53,4 +53,4 @@ jobs:
           context: .
           push: true
           # ZMIEŃ 'twoj-login' na swój login z Docker Hub!
-          tags: ${{ secrets.sebastiankstr }}/my-flask-app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-flask-app:latest
