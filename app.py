@@ -8,6 +8,8 @@ app.secret_key = 'super-secret-key-for-demo'
 # Initialize database
 database.init_db()
 
+
+
 @app.route('/')
 def index():
     if 'user_id' not in session:
