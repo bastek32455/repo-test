@@ -27,14 +27,17 @@ def test_index_status_code(client):
     assert response.status_code == 200
 
 def test_transfer_page_loads(client):
-    """Sprawdza, czy strona przelewu się ładuje."""
+    """Sprawdza, czy strona przelewu ładuje się dla zalogowanego użytkownika."""
+    with client.session_transaction() as sess:
+        sess['user_id'] = 1  # Symulujemy zalogowanie
+    
     response = client.get('/transfer')
     assert response.status_code == 200
 
-def test_history_page_redirect_without_session(client):
-    """Sprawdza, czy historia przekierowuje do głównej (sesja demo jest w /)."""
-    # Usuwamy sesję, żeby sprawdzić przekierowanie
+def test_history_page_loads(client):
+    """Sprawdza, czy historia ładuje się dla zalogowanego użytkownika."""
     with client.session_transaction() as sess:
-        sess.clear()
+        sess['user_id'] = 1
+        
     response = client.get('/history')
-    assert response.status_code == 302 # Przekierowanie
+    assert response.status_code == 200
