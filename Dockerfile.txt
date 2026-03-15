@@ -1,0 +1,20 @@
+# Wybieramy obraz bazowy z zainstalowanym Pythonem
+FROM python:3.11-slim
+
+# Ustawiamy katalog roboczy wewnątrz kontenera
+WORKDIR /app
+
+# Kopiujemy plik z listą bibliotek
+COPY requirements.txt .
+
+# Instalujemy zależności
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Kopiujemy resztę plików aplikacji (kod + foldery html)
+COPY . .
+
+# Informujemy, na którym porcie aplikacja będzie nasłuchiwać
+EXPOSE 5000
+
+# Komenda uruchamiająca aplikację
+CMD ["python", "app.py"]
